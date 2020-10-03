@@ -11,22 +11,32 @@
     <title>Document</title>
   </head>
   <body>
-    <div class="canvas"></div>
+    <canvas id="canvas"></canvas>
     <script>
-      let canvas = document.querySelector(".canvas");
-      canvas.addEventListener("mousedown", function (e) {
-        let div = document.createElement("div");
-        div.style.position = "absolute";
-        div.style.left = e.clientX + "px";
-        div.style.top = e.clientY + "px";
-        div.style.width = "8px";
-        div.style.height = "8px";
-        div.style.marginLeft = "-4px";
-        div.style.marginTop = "-4px";
-        div.style.borderRadius = "50%";
-        div.style.backgroundColor = "black";
-        canvas.appendChild(div);
-      });
+      // 画线
+      let canvas = document.getElementById("canvas");
+      canvas.width = document.documentElement.clientWidth;
+      canvas.height = document.documentElement.clientHeight;
+      let ctx = canvas.getContext("2d");
+      ctx.fillStyle = "black";
+      ctx.StrokeStyle = "none";
+
+      let flag_painting = false;
+      // 设置画图的“红绿灯”，当按下鼠标键时，信号为true。当鼠标键弹起时，信号为false;
+      canvas.onmousedown = () => {
+        flag_painting = true;
+      };
+      canvas.onmousemove = (e) => {
+        if (flag_painting === true) {
+          ctx.beginPath();
+          ctx.arc(e.clientX, e.clientY, 10, 0, 2 * Math.PI);
+          ctx.stroke();
+          ctx.fill();
+        }
+      };
+      canvas.onmouseup = () => {
+        flag_painting = false;
+      };
     </script>
   </body>
 </html>
