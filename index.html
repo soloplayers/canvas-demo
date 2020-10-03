@@ -12,5 +12,21 @@
   </head>
   <body>
     <div class="canvas"></div>
+    <script>
+      let canvas = document.querySelector(".canvas");
+      canvas.addEventListener("mousedown", function (e) {
+        let div = document.createElement("div");
+        div.style.position = "absolute";
+        div.style.left = e.clientX + "px";
+        div.style.top = e.clientY + "px";
+        div.style.width = "8px";
+        div.style.height = "8px";
+        div.style.marginLeft = "-4px";
+        div.style.marginTop = "-4px";
+        div.style.borderRadius = "50%";
+        div.style.backgroundColor = "black";
+        canvas.appendChild(div);
+      });
+    </script>
   </body>
 </html>
